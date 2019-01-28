@@ -1,22 +1,19 @@
 <template>
-  <div class="home">
-    <router-view></router-view>
-    <FootNav></FootNav>
+  <div class="center">
+    我的页
   </div>
 </template>
 
 <script>
-import FootNav from '../components/FootNav'
 export default {
-  name: 'home',
+  name: 'center',
   components: {
-    FootNav
+
   }
 }
 </script>
-
 <style lang="scss">
-.home {
+.center{
   display: flex;
   flex-direction: column;
   justify-content: space-between;

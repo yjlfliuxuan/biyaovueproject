@@ -1,22 +1,21 @@
 <template>
-  <div class="home">
-    <router-view></router-view>
-    <FootNav></FootNav>
+  <div class="first">
+    <Search></Search>
+
   </div>
 </template>
 
 <script>
-import FootNav from '../components/FootNav'
+import Search from '../components/Search'
 export default {
-  name: 'home',
+  name: 'first',
   components: {
-    FootNav
+    Search
   }
 }
 </script>
-
 <style lang="scss">
-.home {
+.first {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
