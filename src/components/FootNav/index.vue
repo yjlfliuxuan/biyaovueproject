@@ -3,7 +3,7 @@
   <div class="lx-foot">
     <ul>
       <router-link v-for="(item,index) in bars" :key="index"
-        :to="{path:item.id}"
+        :to="{path:item.path}"
         tag="li"
         active-class="z-act"
       >
@@ -22,22 +22,26 @@ export default {
     return {
       bars: [
         {
-          id: 'first',
+          id: 'tuijian',
+          path: '/first',
           icon: 'icon-shouye',
           name: '首页'
         },
         {
           id: 'classify',
+          path: '/classify',
           icon: 'icon-leimupinleifenleileibie--',
           name: '分类'
         },
         {
           id: 'shopcar',
+          path: '/shopcar',
           icon: 'icon-gouwuche',
           name: '购物车'
         },
         {
           id: 'center',
+          path: '/center',
           icon: 'icon-gerenzhongxin',
           name: '我的'
         }
@@ -65,7 +69,7 @@ export default {
       color: #797d82;
       text-decoration: none;
       p {
-        line-height: px2rem(28);
+        line-height: px2rem(40);
         font-size: px2rem(24);
         .sz {
           font-size: px2rem(40);
