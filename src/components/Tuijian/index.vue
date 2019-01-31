@@ -29,7 +29,7 @@
         <div class='item-img' v-for="(item,index) in commendlist" :key="index">
           <img :src='item.imageUrl' class='imglist'/>
           <div class='item-text'>
-            <div><span class="item-price">￥</span><span class="item-price distance">{{item.price}}</span><span v-for="(items,indexs) in item.labels" :key="indexs" class='`label${indexs}`'>{{items.content}}</span></div>
+            <div><span class="item-price">￥</span><span class="item-price distance">{{item.price}}</span><span v-for="(items,indexs) in item.labels" :key="indexs" :class='`label${indexs}`'>{{items.content}}</span></div>
             <div class="item-bck">{{item.supplierBackground}}</div>
             <div class='itembott'><span class='item-title'>{{item.title}}</span><span class='item-praise'>{{item.evaluate}}</span></div>
            </div>
@@ -162,6 +162,7 @@ export default {
 }
 .item-price{
    color: #F7A701;
+   font-size: px2rem(36);
 }
 .distance{
 margin-right: px2rem(24);

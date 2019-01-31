@@ -38,10 +38,8 @@ export default {
 <style lang='scss'>
 @import '@/styles/common/px2rem.scss';
 .classify {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+   flex: 1;
+  overflow-y: auto;
   box-sizing: border-box;
   .boxdown{
    width: 100%;

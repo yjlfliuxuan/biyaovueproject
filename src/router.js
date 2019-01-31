@@ -150,6 +150,11 @@ export default new Router({
       ]
     },
     {
+      path: 'searchhot',
+      name: 'searchhot',
+      component: () => import('./views/searchhot.vue')
+    },
+    {
       // 默认配置
       path: '*',
       redirect: '/first/tuijian'

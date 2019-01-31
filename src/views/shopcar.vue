@@ -1,32 +1,32 @@
 <template>
   <div class="shopcar">
     <div class='lx-head'>
-    <div class='lx-homelogo'><img class='lx-img' src='../images/home.png'/></div>
+    <div class='lx-homelogo'><img class='lx-img' src='../images/home.png' @click="jumptofirst"/></div>
     <div class='lx-title'>购物车</div>
     <div class='lx-homelogo'></div>
     </div>
     <div class='lx-main'>
       <div class='lx-mainimgbox'><img class='lx-mainimglogo' src='../images/shopcarlogo.png'/></div>
       <span class='lx-maintext'>购物车还是空的，赶紧行动吧！</span>
-      <button class='lx-mainbtn'>去逛逛</button>
+      <button class='lx-mainbtn' @click="jumptofirst">去逛逛</button>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: 'shopcar',
-  components: {
-
+  methods: {
+    jumptofirst () {
+      this.$router.push('/first/tuijian')
+    }
   }
 }
 </script>
 <style lang="scss">
 @import '@/styles/common/px2rem.scss';
 .shopcar {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100%;
+   flex: 1;
+  overflow-y: auto;
   background-color: #f2f2f2;
     .lx-head{
     background-color: #fff;

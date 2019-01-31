@@ -138,9 +138,8 @@ export default {
 <style lang='scss'>
 @import "@/styles/common/px2rem.scss";
 .first {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    flex: 1;
+  overflow-y: auto;
   .linescroll{
     display: flex;
     flex-shrink:0;

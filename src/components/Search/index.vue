@@ -1,17 +1,14 @@
 
 <template>
-<div class='searchbox'>
-  <input type="search" placeholder="请输入您想要的商品" />
+<router-link tag="div" class='searchbox' :to="{name:'searchhot'}">
+  <input type="search" placeholder="请输入您想要的商品"/>
   <img src='../../images/search.png' class='searchlogo'/>
-</div>
+</router-link>
 </template>
 <script>
 
 export default {
-  name: 'search',
-  components: {
-
-  }
+  name: 'search'
 }
 </script>
 <style lang="scss">
