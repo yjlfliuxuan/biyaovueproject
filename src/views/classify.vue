@@ -4,10 +4,10 @@
        <div class='boxdown'>
           <div class='linescroll'>
               <ul class='classify_list'>
-                <router-link tag="li" :to="{ path: '/classify/fenlei',query:{id:index}}" v-for="(item,index) in classifylist" :key="index" @click.native="changeclassname(index)" :class="tabsindex == index ? 'y-act':''"
+                <router-link tag="li" :to="{ path: '/classify/fenlei',query:{classid:index}}" v-for="(item,index) in classifylist" :key="index" @click.native="changeclassname(index)" :class="tabsindex == index ? 'y-act':''"
            >{{item}}</router-link>
               </ul>
-               <div class='listdetail'>
+               <div class='listdetail1'>
                  <router-view></router-view>
                </div>
           </div>
@@ -38,21 +38,18 @@ export default {
 <style lang='scss'>
 @import '@/styles/common/px2rem.scss';
 .classify {
-   flex: 1;
-  overflow-y: auto;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   .boxdown{
    width: 100%;
    height: 100%;
    overflow:hidden;
-   .listdetail{
-    width: 70%;
-   padding: px2rem(10);
-   }
    .linescroll{
      overflow:auto;
      white-space: nowrap;
-     width:99.5%;
+     width:99.4%;
      height:98%;
      border: px2rem(2) solid #413e3ec5;
      display: flex;
@@ -60,6 +57,9 @@ export default {
      width: 0;
      height: 0;
      color: transparent;
+     }
+     .listdetail1{
+       width:90%;
      }
      .classify_list{
      font-size: px2rem(30);

@@ -2,50 +2,61 @@
    <div class="Fenlei">
       <div class='listdetail'>
           <div class='imgbox'>
-          <img :src='imgboxurl' class='listimgdetail'/>
+          <img :src='fenleilist.imgurl' class='listimgdetail'/>
           </div>
-          <div class='listbox'><span class='listname'>{{listboxtitle}}</span></div>
+          <div class='listbox'><span class='listname'>{{fenleilist.listtitle}}</span></div>
           <div class='listshow'>
-             <div v-for="(item,index) in seleclist" :key="index" class='list-cate'>
-             <img :src='item.imgsrc' class='listimgshow'/>
-             <span>{{item.title}}</span>
+             <div v-for="(items,indexs) in fenleilist.goodlist" :key="indexs" class='list-cate'>
+             <img :src='items.imgsrc' class='listimgshow'/>
+             <span>{{items.title}}</span>
              </div>
           </div>
       </div>
    </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'fenlei',
   data () {
     return {
-      seleclist: []
+      fenleilist: {},
+      classifyid: 0
     }
   },
-  computed: {
-    gettabsindex: function () {
-      var id = this.$route.query.id
-      return id
-    }
-  },
+  // computed: {
+  //   tabindex: function () {
+  //     return Number(this.$router.history.current.query.classid)
+  //   }
+  // },
   created () {
-    this.$route.query.id = 0;
-     axios.get('/static/api/biyaofenlei.json').then(res => {
+    // this.classifyid = Number(this.$router.history.current.query.classid)
+    axios.get('/static/api/biyaofenlei.json').then(res => {
       var datalist = res.data
-      this.seleclist = datalist
+      for (var i = 0; i < datalist.length; i++) {
+        if (datalist[i].id === this.classifyid) {
+          this.fenleilist = datalist[i]
+        }
+      }
     })
   }
 }
 </script>
 <style lang="scss">
 @import "@/styles/common/px2rem.scss";
-.listdetail{
-  width: 70%;
-  padding: px2rem(10);
+.fenlei{
+  width: 100%;
+  .listdetail{
+  width: 100%;
+  .imgbox{
+    width: 100%;
+  }
+ }
 }
 .listimgdetail{
   width: px2rem(530);
   height: px2rem(240);
+  margin: px2rem(10) px2rem(10) px2rem(10) px2rem(20);
 }
 .listname::before{
     content: "";
@@ -84,11 +95,13 @@ export default {
   padding: px2rem(20);
   justify-content: flex-start;
   flex-wrap: wrap;
+  width: 90%;
 }
 .list-cate{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 33%;
   font-size: px2rem(28);
 }
