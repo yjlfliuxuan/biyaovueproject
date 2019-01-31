@@ -127,17 +127,8 @@ export default new Router({
         ]
       }, {
         path: 'classify',
-        component: () => import('./views/classify.vue'),
-        children: [{
-          path: '',
-          redirect: '/classify/fenlei'
-        },
-        {
-          path: 'fenlei',
-          name: 'fenlei',
-          component: () => import('./components/Fenlei/index.vue')
-        }
-        ]
+        name: 'classify',
+        component: () => import('./views/classify.vue')
       }, {
         path: 'shopcar',
         name: 'shopcar',
