@@ -146,6 +146,11 @@ export default new Router({
       component: () => import('./views/searchhot.vue')
     },
     {
+      path: 'verify',
+      name: 'verify',
+      component: () => import('./views/verify.vue')
+    },
+    {
       // 默认配置
       path: '*',
       redirect: '/first/tuijian'

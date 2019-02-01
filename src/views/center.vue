@@ -55,6 +55,14 @@ export default {
   },
   components: {
 
+  },
+  beforeCreate () {
+    console.log(document.cookie)
+    if (!document.cookie) {
+      this.$router.push({
+        name: 'verify'
+      })
+    }
   }
 }
 </script>
