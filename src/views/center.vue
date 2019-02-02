@@ -2,7 +2,7 @@
   <div class="center">
     <div class='lx-head'>
       <div class='lx-headbg'><img class='lx-headbgimg' src='../images/wodelogin.png'/>
-        <span>登录</span>
+        <span>{{username}}</span>
         </div>
     </div>
     <div class='lx-main'>
@@ -30,9 +30,9 @@
         <button class='btn'>关于必要</button>
         </div>
         <div class='loginer'>
-        <span>率直的麦卡锡8693</span>
+        <span>{{username}}</span>
         <span>|</span>
-        <span>退出</span>
+        <span @click="loginout">退出</span>
         </div>
         <div class='foot'>Copyright © 2018, BIYAO.COM</div>
       </div>
@@ -50,15 +50,21 @@ export default {
         { name: '生产中', imgurl: require('../images/shengchanzhong.png') }, { name: '待收货', imgurl: require('../images/daishouhuo.png') },
         { name: '待评价', imgurl: require('../images/daipingjia.png') },
         { name: '退款/售后', imgurl: require('../images/tuikuan.png') }
-      ]
+      ],
+      username: localStorage.getItem('userName')
     }
   },
   components: {
 
   },
+  methods: {
+    loginout () {
+      localStorage.removeItem('userName')
+      this.$router.replace('/verify')
+    }
+  },
   beforeCreate () {
-    console.log(document.cookie)
-    if (!document.cookie) {
+    if (!localStorage.getItem('userName')) {
       this.$router.push({
         name: 'verify'
       })

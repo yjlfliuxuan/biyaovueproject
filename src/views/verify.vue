@@ -1,24 +1,63 @@
 <template>
   <div class="verify">
     <div class='alert_p'>
-  <img src='../images/cancel.png' class='cancel'/>
+  <img src='../images/cancel.png' class='cancel' @click="huitui"/>
   <span class='cellVerify'>验证手机号</span>
-  <div class='phone'><input type='text' placeholder='请输入手机号'/></div>
+  <div class='phone'><input type='text' placeholder='请输入手机号' v-model="phoneInput"/></div>
   <div class='box1'>
-  <div class="duanxin"><input type='text' placeholder='请输入验证码'/></div>
+  <div class="duanxin"><input type='text' placeholder='请输入验证码' v-model="codeInput"/></div>
   <button class='btn'>获取验证码</button>
   </div>
   <div class='attention'>
   <img src='../images/gantan.png' class='gantan'/>
   <span class='jingshi'>若输入的手机号未注册必要，系统会自动帮你注册</span>
   </div>
-  <button class='nextBtn'>下一步</button>
+  <button class='nextBtn' @click="handleLogin" :disabled="isDisabled">下一步</button>
   </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
-  name: 'verify'
+  name: 'verify',
+  data () {
+    return {
+      phoneInput: '',
+      codeInput: ''
+    }
+  },
+  computed: {
+    isDisabled () {
+      if (this.phoneInput && this.codeInput) {
+        return false
+      } else {
+        return true
+      }
+    }
+  },
+  methods: {
+    huitui () {
+      this.$router.push('/first')
+    },
+    handleLogin () {
+      axios.get('/static/api/users.json', {
+        params: {
+          phone: this.phoneInput,
+          code: this.codeInput
+        }
+      }).then(res => {
+        var result = res.data
+        if (result.phone === this.phoneInput && result.code === this.codeInput) {
+          console.log('登录成功')
+          // 写入 本地存储
+          localStorage.setItem('userName', this.phoneInput)
+          this.$router.replace('/center')
+        } else {
+          console.log('手机号或验证码错误')
+        }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss">
