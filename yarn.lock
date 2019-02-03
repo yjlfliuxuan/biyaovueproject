@@ -4015,6 +4015,11 @@ gzip-size@^5.0.0:
     duplexer "^0.1.1"
     pify "^3.0.0"
 
+hammerjs@^2.0.6:
+  version "2.0.8"
+  resolved "http://registry.npm.taobao.org/hammerjs/download/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
+
 handle-thing@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/handle-thing/download/handle-thing-2.0.0.tgz#0e039695ff50c93fc288557d696f3c1dc6776754"
@@ -8439,6 +8444,13 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.8.2"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.8.2.tgz#dd73e80ba58bb65dd7a8aa2aeef6089cf6116f2a"
   integrity sha1-3XPoC6WLtl3XqKoq7vYInPYRbyo=
+
+vue-touch@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/vue-touch/download/vue-touch-1.1.0.tgz#f69da3b4bf033f3f7bcf5864011a6b4d4bb596b9"
+  integrity sha1-9p2jtL8DPz97z1hkARprTUu1lrk=
+  dependencies:
+    hammerjs "^2.0.6"
 
 vue@^2.5.21:
   version "2.5.22"

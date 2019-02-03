@@ -151,6 +151,11 @@ export default new Router({
       component: () => import('./views/verify.vue')
     },
     {
+      path: 'goodsdetail',
+      name: 'goodsdetail',
+      component: () => import('./views/goodsdetail.vue')
+    },
+    {
       // 默认配置
       path: '*',
       redirect: '/first/tuijian'

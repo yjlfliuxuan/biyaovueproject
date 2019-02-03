@@ -26,7 +26,7 @@
       </div>
       <div class='grayline'></div>
       <div class='commend-info'>
-        <div class='item-img' v-for="(item,index) in commendlist" :key="index">
+        <div class='item-img' v-for="(item,index) in commendlist" :key="index" @click="gotogoodsdetail(index)">
           <img :src='item.imageUrl' class='imglist'/>
           <div class='item-text'>
             <div><span class="item-price">￥</span><span class="item-price distance">{{item.price}}</span><span v-for="(items,indexs) in item.labels" :key="indexs" :class='`label${indexs}`'>{{items.content}}</span></div>
@@ -57,6 +57,16 @@ export default {
         { imgurl: require('../../images/smallfoot.png'), imgtext: '男女鞋靴' }
       ],
       commendlist: []
+    }
+  },
+  methods: {
+    gotogoodsdetail (index) {
+      this.$router.push({
+        name: 'goodsdetail',
+        params: {
+          goodsindex: index
+        }
+      })
     }
   },
   mounted () {
