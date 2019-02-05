@@ -4,9 +4,9 @@
       <div class='swiper-wrapper'>
         <div
           class="swiper-slide"
-          v-for="(item,index) in imgUrlslist.imgUrls"
+          v-for="(item,index) in imglist"
           :key="index"
-          @change="changeswiperindex(index)"
+          @touchstart="changeswiperindex(index)"
         >
           <img
             :src="item"
@@ -78,27 +78,86 @@
         /></div>
     </div>
     <div class="btns">
-    <button>加入购物车</button>
-    <button>立即购买</button>
+      <button @click="changeroute" class="btn">{{'购物车('+biyaoshopcarnum+')'}}</button>
+      <button @click="changeroute" class="btn">立即购买</button>
+      <div class="mui-numbox">
+        <!-- "-"按钮，点击可减小当前数值 -->
+        <button
+          class="mui-btn mui-numbox-btn-minus"
+          type="button"
+          @click.stop="reducegoodsNum(imgUrlslist)"
+        >-</button>
+        <input
+          class="mui-numbox-input"
+          type="number"
+          disabled
+          :value="findNum(imgUrlslist)"
+        />
+        <!-- "+"按钮，点击可增大当前数值 -->
+        <button
+          class="mui-btn mui-numbox-btn-plus"
+          type="button"
+          @click.stop="addgoodsNum(imgUrlslist)"
+        >+</button>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import Swiper from 'swiper'
 import axios from 'axios'
+import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'goodsdetail',
-  data () {
+  data () { // 为什么图片数据数组放在data()中，页面中图片插件swiper可以左右滑动，而以axios请求本地json文件获取到的图片数据数组遍历后，插件swiper却滑动不了了
     return {
       fenyenum: 1,
-      imgUrlslist: {}
+      imgUrlslist: {},
+      imglist: []
     }
   },
+  computed: {
+    ...mapState([
+      'biyaoshopcar',
+      'biyaoshopcarnum'
+    ])
+  },
   methods: {
+    // 这里的图片下标在touchstart事件上存在问题，感觉这个事件不适合，但change事件也不行
     changeswiperindex (index) {
       console.log(index)
       this.fenyenum = index
+    },
+    ...mapMutations([
+      'addgoodsNum',
+      'reducegoodsNum'
+    ]),
+    changeroute () {
+      // 编程式导航
+      this.$router.push({
+        name: 'shopcar'
+      })
+    },
+    findNum (imgUrlslist) {
+      let goodid = imgUrlslist.goodsid
+      let num = 0
+      this.biyaoshopcar.forEach(item => {
+        if (item.goodsid === goodid) {
+          num += item.goodsNum
+        }
+      })
+      return num
+    },
+    gettotalNum () {
+      var goodscount = 0
+      this.biyaoshopcar.forEach(item => {
+        goodscount += Number(item.goodsNum)
+      })
+      this.$store.commit('changetotalnum', goodscount)
     }
+  },
+  created () {
+    this.gettotalNum()
   },
   mounted () {
     /* eslint-disable no-new */
@@ -111,6 +170,8 @@ export default {
       for (var i = 0; i < datalist.length; i++) {
         if (datalist[i].goodsid === goodindex) {
           this.imgUrlslist = datalist[i]
+          this.imglist = datalist[i].imgUrls
+          this.imgUrlslist.num = 0
         }
       }
     })
@@ -145,21 +206,36 @@ export default {
     height: 100%;
   }
 }
-.btns{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   button{
-     width: 30%;
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .btn {
+    flex: 3;
+    width: 30%;
+    height: px2rem(80);
+    line-height: px2rem(80);
+    font-size: px2rem(25);
+    border-radius: px2rem(20);
+    text-align: center;
+    background: red;
+    color: #fff;
+  }
+  .mui-numbox{
+  display: flex;
+  flex: 4;
+  .mui-btn{
+    flex: 1;
+    width:px2rem(60);
      height: px2rem(80);
-     line-height: px2rem(80);
-     font-size: px2rem(25);
-     border-radius: px2rem(20);
-     text-align: center;
-     background: red;
-     color: #fff;
-   }
+  }
+  .mui-numbox-input{
+    flex: 3;
+     height: px2rem(80);
+  }
 }
+}
+
 .gl-detial-wrap {
   padding: px2rem(20);
 }
@@ -259,7 +335,6 @@ export default {
   display: flex;
   height: px2rem(94);
   padding: px2rem(20);
-  margin-bottom: px2rem(70);
 }
 .location-icon {
   display: flex;
